@@ -1,0 +1,25 @@
+package domain.models
+
+enum class OlympicEvent(val year: Int, val season: Season) {
+    SEOUL_1988(1988, Season.SUMMER),
+    BARCELONA_1992(1992, Season.SUMMER),
+    ATLANTA_1996(1996, Season.SUMMER),
+    SYDNEY_2000(2000, Season.SUMMER),
+    ATHENS_2004(2004, Season.SUMMER),
+    BEIJING_2008(2008, Season.SUMMER),
+    LONDON_2012(2012, Season.SUMMER),
+    RIO_2016(2016, Season.SUMMER),
+    TOKYO_2020(2021, Season.SUMMER),
+    PARIS_2024(2024, Season.SUMMER),
+    ALBERTVILLE_1992(1992, Season.WINTER),
+    LILLEHAMMER_1994(1994, Season.WINTER),
+    NAGANO_1998(1998, Season.WINTER),
+    SALT_LAKE_CITY_2002(2002, Season.WINTER),
+    TURIN_2006(2006, Season.WINTER),
+    VANCOUVER_2010(2010, Season.WINTER),
+    SOCHI_2014(2014, Season.WINTER),
+    PYEONGCHANG_2018(2018, Season.WINTER),
+    BEIJING_2022(2022, Season.WINTER),
+    MILAN_CORTINA_2026(2026, Season.WINTER),
+    MUNICH_1972(1972, Season.WINTER),
+}
