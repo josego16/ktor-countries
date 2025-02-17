@@ -1,7 +1,7 @@
 package domain.usecase
 
 import domain.models.Country
-import domain.models.Language
+import domain.models.enums.Language
 import domain.repository.CountryInterface
 
 class CountryByLanguageUseCase(val repository: CountryInterface) {

@@ -1,7 +1,7 @@
 package ktor
 
 import domain.models.Country
-import domain.models.Language
+import domain.models.enums.Language
 import domain.models.UpdateCountry
 import domain.usecase.ProviderUseCase
 import domain.usecase.ProviderUseCase.logger

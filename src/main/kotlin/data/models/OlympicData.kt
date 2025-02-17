@@ -1,9 +1,9 @@
 package data.models
 
 import domain.models.Country
-import domain.models.Language
-import domain.models.OlympicEvent
-import domain.models.Sport
+import domain.models.enums.Language
+import domain.models.enums.OlympicEvent
+import domain.models.enums.Sport
 
 object OlympicData {
     val listCountry = mutableListOf(

@@ -3,7 +3,7 @@ package domain.usecase
 import data.repository.MemoryOlympicRepo
 import domain.models.Country
 import domain.models.UpdateCountry
-import domain.models.Language
+import domain.models.enums.Language
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

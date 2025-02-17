@@ -1,4 +1,4 @@
-package domain.models
+package domain.models.enums
 
 enum class Sport {
     ATHLETICS, SWIMMING, GYMNASTICS, BASKETBALL, FOOTBALL, TENNIS,

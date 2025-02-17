@@ -1,4 +1,4 @@
-package domain.models
+package domain.models.enums
 
 enum class Language {
     ENGLISH,

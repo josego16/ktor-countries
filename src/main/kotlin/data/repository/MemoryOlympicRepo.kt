@@ -3,7 +3,7 @@ package data.repository
 import data.models.OlympicData
 import domain.models.Country
 import domain.models.UpdateCountry
-import domain.models.Language
+import domain.models.enums.Language
 import domain.repository.CountryInterface
 
 class MemoryOlympicRepo : CountryInterface {

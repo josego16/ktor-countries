@@ -1,4 +1,4 @@
-package domain.models
+package domain.models.enums
 
 enum class OlympicEvent(val year: Int, val season: Season) {
     SEOUL_1988(1988, Season.SUMMER),

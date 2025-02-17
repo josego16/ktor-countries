@@ -2,7 +2,7 @@ package domain.repository
 
 import domain.models.Country
 import domain.models.UpdateCountry
-import domain.models.Language
+import domain.models.enums.Language
 
 interface CountryInterface {
     fun allCountries(): List<Country>
