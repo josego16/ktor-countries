@@ -3,8 +3,8 @@ package ktor
 import domain.models.Country
 import domain.models.enums.Language
 import domain.models.UpdateCountry
-import domain.usecase.ProviderUseCase
-import domain.usecase.ProviderUseCase.logger
+import domain.ProviderUseCase
+import domain.ProviderUseCase.logger
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.server.application.*

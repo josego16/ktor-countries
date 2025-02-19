@@ -1,9 +1,15 @@
-package domain.usecase
+package domain
 
 import data.repository.MemoryOlympicRepo
 import domain.models.Country
 import domain.models.UpdateCountry
 import domain.models.enums.Language
+import domain.usecase.AddCountryUseCase
+import domain.usecase.AllCountryUseCase
+import domain.usecase.CountryByIdUseCase
+import domain.usecase.CountryByLanguageUseCase
+import domain.usecase.DeleteCountryUseCase
+import domain.usecase.UpdateCountryUseCase
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -18,7 +24,7 @@ object ProviderUseCase {
     private val deleteCountryUseCase = DeleteCountryUseCase(repository)
     private val updateCountryUseCase = UpdateCountryUseCase(repository)
 
-    fun allCountries() = allCountryUseCase
+    fun allCountries() = allCountryUseCase()
     fun countryById(id: Int): Country? {
         countryByIdUseCase.id = id
         val country = countryByIdUseCase()
