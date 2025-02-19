@@ -1,7 +1,7 @@
 package domain.repository
 
-import domain.models.Country
-import domain.models.UpdateCountry
+import domain.models.country.Country
+import domain.models.country.UpdateCountry
 import domain.models.enums.Language
 
 interface CountryInterface {

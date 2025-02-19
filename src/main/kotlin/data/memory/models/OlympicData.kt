@@ -1,6 +1,6 @@
-package data.models
+package data.memory.models
 
-import domain.models.Country
+import domain.models.country.Country
 import domain.models.enums.Language
 import domain.models.enums.OlympicEvent
 import domain.models.enums.Sport

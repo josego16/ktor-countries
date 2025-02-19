@@ -1,8 +1,8 @@
 package domain.usecase
 
-import data.repository.MemoryOlympicRepo
-import domain.models.Country
-import domain.models.UpdateCountry
+import data.memory.repository.MemoryOlympicRepo
+import domain.models.country.Country
+import domain.models.country.UpdateCountry
 import domain.models.enums.Language
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

@@ -1,8 +1,8 @@
-package data.repository
+package data.memory.repository
 
-import data.models.OlympicData
-import domain.models.Country
-import domain.models.UpdateCountry
+import data.memory.models.OlympicData
+import domain.models.country.Country
+import domain.models.country.UpdateCountry
 import domain.models.enums.Language
 import domain.repository.CountryInterface
 

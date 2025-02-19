@@ -1,8 +1,8 @@
 package ktor
 
-import domain.models.Country
+import domain.models.country.Country
 import domain.models.enums.Language
-import domain.models.UpdateCountry
+import domain.models.country.UpdateCountry
 import domain.usecase.ProviderUseCase
 import domain.usecase.ProviderUseCase.logger
 import io.ktor.http.*

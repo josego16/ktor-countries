@@ -1,6 +1,6 @@
 package domain.usecase
 
-import domain.models.UpdateCountry
+import domain.models.country.UpdateCountry
 import domain.repository.CountryInterface
 
 class UpdateCountryUseCase(val repository: CountryInterface) {

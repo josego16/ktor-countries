@@ -1,6 +1,6 @@
 package domain.usecase
 
-import domain.models.Country
+import domain.models.country.Country
 import domain.models.enums.Language
 import domain.repository.CountryInterface
 

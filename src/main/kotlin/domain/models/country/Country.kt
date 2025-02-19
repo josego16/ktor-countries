@@ -1,4 +1,4 @@
-package domain.models
+package domain.models.country
 
 import domain.models.enums.Language
 import domain.models.enums.OlympicEvent
@@ -11,7 +11,7 @@ data class Country(
     val name: String,
     val country: String,
     val language: Language,
-    val hostedOlympics: List<OlympicEvent> = emptyList(),
-    val activeSport: List<Sport> = emptyList(),
+    val hostedOlympics: List<OlympicEvent>,
+    val activeSport: List<Sport>,
     val flagUrl: String? = null
 )

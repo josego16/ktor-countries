@@ -1,4 +1,4 @@
-package domain.models
+package domain.models.country
 
 import domain.models.enums.Language
 import domain.models.enums.OlympicEvent
