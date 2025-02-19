@@ -11,7 +11,8 @@ class UpdateCountryUseCase(val repository: CountryInterface) {
         return if (updateCountry == null || id == null) {
             false
         } else {
-            return repository.updateCountry(updateCountry!!, id!!)
+            val result = repository.updateCountry(updateCountry!!, id!!)
+            result != null
         }
     }
 }

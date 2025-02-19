@@ -23,30 +23,39 @@ class MemoryOlympicRepo : CountryInterface {
         return OlympicData.listCountry.find { it.id == id }
     }
 
-    override fun addCountry(country: Country): Boolean {
+    override fun addCountry(country: Country): Country? {
         val coun = countryById(country.id)
         return if (coun != null) {
-            throw IllegalArgumentException("No es posible añadir un pais que ya existe")
+            null
         } else {
-            OlympicData.listCountry.add(country)
-            true
+            try {
+                OlympicData.listCountry.add(country)
+                country
+            } catch (error: Exception) {
+                null
+            }
         }
     }
 
-    override fun updateCountry(updateCountry: UpdateCountry, id: Int): Boolean {
-        val index = OlympicData.listCountry.indexOfFirst { it.id == id }
-        return if (index != -1) {
-            val currentCountry = OlympicData.listCountry[index]
-            OlympicData.listCountry[index] = currentCountry.copy(
-                name = updateCountry.name ?: currentCountry.name,
-                language = updateCountry.language ?: currentCountry.language,
-                hostedOlympics = updateCountry.hostedOlympics ?: currentCountry.hostedOlympics,
-                activeSport = updateCountry.activeSport ?: currentCountry.activeSport,
-                flagUrl = updateCountry.flagUrl ?: currentCountry.flagUrl
-            )
-            true
-        } else {
-            false
+    override fun updateCountry(updateCountry: UpdateCountry, id: Int): Country? {
+        return try {
+            val index = OlympicData.listCountry.indexOfFirst { it.id == id }
+            if (index != -1) {
+                val currentCountry = OlympicData.listCountry[index]
+                val updatedCountry = currentCountry.copy(
+                    name = updateCountry.name ?: currentCountry.name,
+                    language = updateCountry.language ?: currentCountry.language,
+                    hostedOlympics = updateCountry.hostedOlympics ?: currentCountry.hostedOlympics,
+                    activeSport = updateCountry.activeSport ?: currentCountry.activeSport,
+                    flagUrl = updateCountry.flagUrl ?: currentCountry.flagUrl
+                )
+                OlympicData.listCountry[index] = updatedCountry
+                updatedCountry
+            } else {
+                null
+            }
+        } catch (error: Exception) {
+            null
         }
     }
 

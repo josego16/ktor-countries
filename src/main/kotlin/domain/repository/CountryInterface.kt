@@ -9,7 +9,7 @@ interface CountryInterface {
     fun countriesByLanguage(language: Language): List<Country>
     fun countryByName(name: String): Country?
     fun countryById(id: Int): Country?
-    fun addCountry(country: Country): Boolean
-    fun updateCountry(updateCountry: UpdateCountry, id: Int): Boolean
+    fun addCountry(country: Country): Country?
+    fun updateCountry(updateCountry: UpdateCountry, id: Int): Country?
     fun deleteCountry(id: Int): Boolean
 }
