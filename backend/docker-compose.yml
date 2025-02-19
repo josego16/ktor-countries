@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:latest  # Imagen de PostgreSQL
+    container_name: dbCountries  # Nombre del contenedor
+    environment:
+      POSTGRES_DB: dbCountries  # Nombre de la base de datos
+      POSTGRES_USER: josema  # Usuario de la base de datos
+      POSTGRES_PASSWORD: josema  # Contraseña de la base de datos
+    ports:
+      - "5432:5432"  # Puerto para acceder a la base de datos desde tu máquina local
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Volumen persistente para que los datos no se pierdan
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Puedes agregar un archivo SQL para inicializar la base de datos
+    networks:
+      - backend_network  # Conectamos a una red específica para los servicios
+
+  pgadmin:
+    image: dpage/pgadmin4  # Imagen de pgAdmin
+    container_name: pgadmin  # Nombre del contenedor
+    depends_on:
+      - db  # Asegura que pgAdmin se inicie después de la base de datos
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com  # Email para acceder a pgAdmin
+      PGADMIN_DEFAULT_PASSWORD: admin  # Contraseña para acceder a pgAdmin
+    ports:
+      - "8000:80"  # Acceder a pgAdmin en localhost:8000
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin  # Volumen persistente para datos de pgAdmin
+    networks:
+      - backend_network  # Conectamos a la misma red para que pgAdmin y db puedan comunicarse
+
+networks:
+  backend_network:
+    driver: bridge  # Usamos un "bridge" network para que los contenedores se comuniquen
+
+volumes:
+  db_data:  # Volumen para los datos de la base de datos PostgreSQL
+  pgadmin_data:  # Volumen para los datos de pgAdmin
