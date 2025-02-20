@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class UpdateCountry(
-    val id: Int? = null,
+    val pid: String? = null,
     val name: String? = null,
     val country: String? = null,
     val language: Language? = null,

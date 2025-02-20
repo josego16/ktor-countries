@@ -5,11 +5,11 @@ import domain.models.country.UpdateCountry
 import domain.models.enums.Language
 
 interface CountryInterface {
-    fun allCountries(): List<Country>
-    fun countriesByLanguage(language: Language): List<Country>
-    fun countryByName(name: String): Country?
-    fun countryById(id: Int): Country?
-    fun addCountry(country: Country): Country?
-    fun updateCountry(updateCountry: UpdateCountry, id: Int): Country?
-    fun deleteCountry(id: Int): Boolean
+    suspend fun allCountries(): List<Country>
+    suspend fun countriesByLanguage(language: Language): List<Country>
+    suspend fun countryByName(name: String): Country?
+    suspend fun countryByPid(pid: String): Country?
+    suspend fun addCountry(country: Country): Country?
+    suspend fun updateCountry(updateCountry: UpdateCountry, pid: String): Country?
+    suspend fun deleteCountry(pid: String): Boolean
 }

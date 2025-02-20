@@ -1,8 +1,8 @@
 package ktor
 
 import domain.models.country.Country
-import domain.models.enums.Language
 import domain.models.country.UpdateCountry
+import domain.models.enums.Language
 import domain.usecase.ProviderUseCase
 import domain.usecase.ProviderUseCase.logger
 import io.ktor.http.*
@@ -27,10 +27,10 @@ fun Application.configureRouting() {
 
         // Petición GET para obtener países
         get("/country") {
-            val id = call.request.queryParameters["id"]?.toInt()
-            logger.warn("El id tiene valor de $id")
-            if (id != null) {
-                val country = ProviderUseCase.countryById(id)
+            val pid = call.request.queryParameters["pid"]
+            logger.warn("El pid tiene valor de $pid")
+            if (pid != null) {
+                val country = ProviderUseCase.countryById(pid)
                 if (country == null) {
                     call.respond(HttpStatusCode.NotFound, "País no encontrado")
                 } else {
@@ -65,7 +65,7 @@ fun Application.configureRouting() {
                     call.respond(HttpStatusCode.Conflict, "El pais no ha podido insertarse, puede que ya exista")
                     return@post
                 }
-                call.respond(HttpStatusCode.Created, "Se ha insertado correctamente con id = ${country.id}")
+                call.respond(HttpStatusCode.Created, "Se ha insertado correctamente con pid = ${country.pid}")
             } catch (error: IllegalArgumentException) {
                 call.respond(HttpStatusCode.BadRequest, error.localizedMessage)
             } catch (error: JsonConvertException) {
@@ -74,17 +74,17 @@ fun Application.configureRouting() {
         }
 
         // Petición PATCH para editar un país
-        patch("/country/{id}") {
+        patch("/country/{pid}") {
             try {
-                val id = call.parameters["id"]?.toInt()
-                id?.let {
+                val pid = call.parameters["pid"]
+                pid?.let {
                     val updatedData = call.receive<UpdateCountry>()
-                    val updatedCountry = ProviderUseCase.updateCountry(updatedData, id)
+                    val updatedCountry = ProviderUseCase.updateCountry(updatedData, pid)
                     if (!updatedCountry) {
                         call.respond(HttpStatusCode.Conflict, "El pais no puede modificarse, puede que ya exista")
                         return@patch
                     }
-                    call.respond(HttpStatusCode.Created, "Se ha modificado correctamente con id = $id")
+                    call.respond(HttpStatusCode.Created, "Se ha modificado correctamente con pid = $pid")
                 } ?: run {
                     call.respond(HttpStatusCode.BadRequest, "Debes identificar el pais")
                     return@patch
@@ -97,11 +97,11 @@ fun Application.configureRouting() {
         }
 
         // Petición DELETE para eliminar un país
-        delete("/country/{id}") {
-            val id = call.parameters["id"]?.toInt()
-            logger.warn("Queremos borrar el pais con el $id")
-            id?.let {
-                val deleted = ProviderUseCase.deleteCountry(id)
+        delete("/country/{pid}") {
+            val pid = call.parameters["pid"]
+            logger.warn("Queremos borrar el pais con el $pid")
+            pid?.let {
+                val deleted = ProviderUseCase.deleteCountry(pid)
                 if (!deleted) {
                     call.respond(HttpStatusCode.NotFound, "País no encontrado para borrar")
                 } else {

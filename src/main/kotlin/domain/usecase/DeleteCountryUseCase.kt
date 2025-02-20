@@ -3,13 +3,13 @@ package domain.usecase
 import domain.repository.CountryInterface
 
 class DeleteCountryUseCase(val repository: CountryInterface) {
-    var id: Int? = null
+    var pid: String? = null
 
-    operator fun invoke(): Boolean {
-        return if (id == null) {
+    suspend operator fun invoke(): Boolean {
+        return if (pid == null) {
             false
         } else {
-            return repository.deleteCountry(id!!)
+            return repository.deleteCountry(pid!!)
         }
     }
 }

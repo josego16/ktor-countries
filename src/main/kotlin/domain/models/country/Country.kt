@@ -7,11 +7,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Country(
-    val id: Int,
+    val pid: String,
     val name: String,
     val country: String,
     val language: Language,
-    val hostedOlympics: List<OlympicEvent>,
+    val hostedOlympic: List<OlympicEvent>,
     val activeSport: List<Sport>,
     val flagUrl: String? = null
 )

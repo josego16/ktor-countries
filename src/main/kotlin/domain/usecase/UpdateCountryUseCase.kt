@@ -5,13 +5,13 @@ import domain.repository.CountryInterface
 
 class UpdateCountryUseCase(val repository: CountryInterface) {
     var updateCountry: UpdateCountry? = null
-    var id: Int? = null
+    var pid: String? = null
 
-    operator fun invoke(): Boolean {
-        return if (updateCountry == null || id == null) {
+    suspend operator fun invoke(): Boolean {
+        return if (updateCountry == null || pid == null) {
             false
         } else {
-            val result = repository.updateCountry(updateCountry!!, id!!)
+            val result = repository.updateCountry(updateCountry!!, pid!!)
             result != null
         }
     }
