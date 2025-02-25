@@ -1,6 +1,6 @@
-package domain.usecase
+package domain.country.usecase
 
-import domain.repository.CountryInterface
+import domain.country.repository.CountryInterface
 
 class DeleteCountryUseCase(val repository: CountryInterface) {
     var pid: String? = null

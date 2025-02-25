@@ -1,5 +1,8 @@
-package domain.models.enums
+package domain.country.models.enums
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class Language {
     ENGLISH,
     SPANISH,

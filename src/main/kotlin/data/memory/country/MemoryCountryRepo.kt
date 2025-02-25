@@ -1,10 +1,9 @@
-package data.memory.repository
+package data.memory.country
 
-import data.memory.models.CountriesData
-import domain.models.country.Country
-import domain.models.country.UpdateCountry
-import domain.models.enums.Language
-import domain.repository.CountryInterface
+import domain.country.models.country.Country
+import domain.country.models.country.UpdateCountry
+import domain.country.models.enums.Language
+import domain.country.repository.CountryInterface
 
 class MemoryCountryRepo : CountryInterface {
     override suspend fun allCountries(): List<Country> {
@@ -23,7 +22,7 @@ class MemoryCountryRepo : CountryInterface {
         return CountriesData.listCountry.find { it.pid == pid }
     }
 
-    override suspend fun addCountry(country: Country): Country? {
+    override suspend fun postCountry(country: Country): Country? {
         val coun = countryByPid(country.pid)
         return if (coun != null) {
             null
@@ -45,8 +44,8 @@ class MemoryCountryRepo : CountryInterface {
                 val updatedCountry = currentCountry.copy(
                     name = updateCountry.name ?: currentCountry.name,
                     language = updateCountry.language ?: currentCountry.language,
-                    hostedOlympic = updateCountry.hostedOlympics ?: currentCountry.hostedOlympic,
-                    activeSport = updateCountry.activeSport ?: currentCountry.activeSport,
+                    famousEvent = updateCountry.famousEvent ?: currentCountry.famousEvent,
+                    typicalGastronomy = updateCountry.tpycalGastronomy ?: currentCountry.typicalGastronomy,
                     flagUrl = updateCountry.flagUrl ?: currentCountry.flagUrl
                 )
                 CountriesData.listCountry[index] = updatedCountry

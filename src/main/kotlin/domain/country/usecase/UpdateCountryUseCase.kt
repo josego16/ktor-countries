@@ -1,7 +1,7 @@
-package domain.usecase
+package domain.country.usecase
 
-import domain.models.country.UpdateCountry
-import domain.repository.CountryInterface
+import domain.country.models.country.UpdateCountry
+import domain.country.repository.CountryInterface
 
 class UpdateCountryUseCase(val repository: CountryInterface) {
     var updateCountry: UpdateCountry? = null

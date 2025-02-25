@@ -1,7 +1,7 @@
-package domain.usecase
+package domain.country.usecase
 
-import domain.models.country.Country
-import domain.repository.CountryInterface
+import domain.country.models.country.Country
+import domain.country.repository.CountryInterface
 
 class CountryByPidUseCase(val repository: CountryInterface) {
     var pid: String? = null

@@ -1,0 +1,16 @@
+package domain.country.models.enums
+
+enum class Events {
+    TOUR_DE_FRANCE,
+    SUPER_BOWL,
+    CHERRY_BLOSSOM_FESTIVAL,
+    OKTOBERFEST,
+    CARNIVAL_OF_RIO,
+    BORYEONG_MUD_FESTIVAL,
+    CHINESE_NEW_YEAR,
+    RUNNING_OF_THE_BULLS,
+    VICTORY_DAY_PARADE,
+    VENICE_CARNIVAL,
+    WIMBLEDON,
+    MELBOURNE_CUP
+}

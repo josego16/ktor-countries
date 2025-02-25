@@ -1,4 +1,4 @@
-package data.persistence.models
+package data.persistence
 
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Transaction

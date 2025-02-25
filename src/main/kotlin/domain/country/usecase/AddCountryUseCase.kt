@@ -1,14 +1,14 @@
-package domain.usecase
+package domain.country.usecase
 
-import domain.models.country.Country
-import domain.repository.CountryInterface
+import domain.country.models.country.Country
+import domain.country.repository.CountryInterface
 
 class AddCountryUseCase(val repository: CountryInterface) {
     var country: Country? = null
 
     suspend operator fun invoke(): Boolean {
         return country?.let {
-            repository.addCountry(it) != null
+            repository.postCountry(it) != null
         } == true
     }
 }

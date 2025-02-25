@@ -1,5 +1,6 @@
-package data.persistence.models.country
+package data.persistence.country.models
 
+import data.persistence.country.models.CountryTable
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
@@ -9,9 +10,9 @@ class CountryDao(id: EntityID<Int>) : IntEntity(id) {
 
     var pid by CountryTable.pid
     var name by CountryTable.name
-    var country by CountryTable.country
+    var capital by CountryTable.capital
     var language by CountryTable.language
-    var hostedOlympic by CountryTable.hostedOlympic
-    var activeSport by CountryTable.activeSport
+    var famousEvent by CountryTable.famousEvent
+    var typicalGastronomy by CountryTable.typicalGastronomy
     var flagUrl by CountryTable.flagUrl
 }
