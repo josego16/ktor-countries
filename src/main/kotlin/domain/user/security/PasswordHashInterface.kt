@@ -1,4 +1,4 @@
-package domain.security
+package domain.user.security
 
 interface PasswordHashInterface {
     fun hash(passwd: String): String

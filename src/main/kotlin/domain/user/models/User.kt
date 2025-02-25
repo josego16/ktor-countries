@@ -1,10 +1,13 @@
-package domain.models.user
+package domain.user.models
 
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
+    val dni: String,
     val username: String,
     val password: String,
+    val name: String,
+    val phone: String,
     val token: String? = null,
 )

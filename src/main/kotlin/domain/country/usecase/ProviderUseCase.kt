@@ -1,18 +1,15 @@
-package domain.usecase
+package domain.country.usecase
 
-import data.persistence.repository.PersistenceCountryRepo
-import data.persistence.repository.PersistenceUserRepo
-import domain.models.country.Country
-import domain.models.country.UpdateCountry
-import domain.models.enums.Language
-import domain.models.user.UpdateUser
-import domain.models.user.User
+import data.persistence.country.repository.PersistenceCountryRepo
+import data.persistence.user.repository.PersistenceUserRepo
+import domain.country.models.country.Country
+import domain.country.models.country.UpdateCountry
+import domain.country.models.enums.Language
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 object ProviderUseCase {
     private val repoCountry = PersistenceCountryRepo()
-    private val repoUser = PersistenceUserRepo()
     val logger: Logger = LoggerFactory.getLogger("CountryUseCaseLogger")
 
     private val allCountryUseCase = AllCountryUseCase(repoCountry)
@@ -21,8 +18,6 @@ object ProviderUseCase {
     private val addCountryUseCase = AddCountryUseCase(repoCountry)
     private val deleteCountryUseCase = DeleteCountryUseCase(repoCountry)
     private val updateCountryUseCase = UpdateCountryUseCase(repoCountry)
-    private val loginUseCase = LoginUseCase(repoUser)
-    private val registerUseCase = RegisterUseCase(repoUser)
 
     suspend fun allCountries() = allCountryUseCase()
     suspend fun countryById(pid: String): Country? {
@@ -67,17 +62,5 @@ object ProviderUseCase {
     suspend fun deleteCountry(pid: String): Boolean {
         deleteCountryUseCase.pid = pid
         return deleteCountryUseCase()
-    }
-
-    suspend fun login(username: String?, password: String?): Boolean {
-        return loginUseCase(username, password)
-    }
-
-    suspend fun register(user: UpdateUser): User? {
-        return if (user.username.isNullOrBlank() || user.password.isNullOrBlank()) {
-            null
-        } else {
-            registerUseCase(user)
-        }
     }
 }
