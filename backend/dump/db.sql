@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS dbCounties;
+CREATE DATABASE IF NOT EXISTS dbCountries;
 
 -- Crear tabla Country
 CREATE TABLE Country
