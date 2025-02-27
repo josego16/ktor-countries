@@ -1,1 +1,1 @@
-rootProject.name = "olympic-games"
+rootProject.name = "ktor-countries"
