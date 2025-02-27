@@ -3,8 +3,6 @@ package domain.country.mapping
 import data.persistence.country.models.CountryDao
 import domain.country.models.country.Country
 import domain.country.models.country.UpdateCountry
-import domain.country.models.enums.Events
-import domain.country.models.enums.Gastronomy
 import domain.country.models.enums.Language
 
 fun countryDaoToCountry(countryDao: CountryDao): Country {
@@ -13,8 +11,8 @@ fun countryDaoToCountry(countryDao: CountryDao): Country {
         countryDao.name,
         countryDao.capital,
         countryDao.language.toLanguageOrDefault(),
-        countryDao.famousEvent.toEventsOrDefault(),
-        countryDao.typicalGastronomy.toGastornomyOrDefault(),
+        countryDao.famousEvent,
+        countryDao.typicalGastronomy,
         countryDao.flagUrl ?: "null"
     )
     return coun
@@ -38,21 +36,5 @@ fun String.toLanguageOrDefault(): Language {
         Language.valueOf(this)
     } catch (error: IllegalArgumentException) {
         Language.ENGLISH
-    }
-}
-
-fun String.toEventsOrDefault(): Events {
-    return try {
-        Events.valueOf(this)
-    } catch (error: IllegalArgumentException) {
-        Events.SUPER_BOWL
-    }
-}
-
-fun String.toGastornomyOrDefault(): Gastronomy {
-    return try {
-        Gastronomy.valueOf(this)
-    } catch (error: IllegalArgumentException) {
-        Gastronomy.JAMON_IBERICO
     }
 }
