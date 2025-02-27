@@ -3,8 +3,8 @@ package ktor.routing
 import domain.country.models.country.Country
 import domain.country.models.country.UpdateCountry
 import domain.country.models.enums.Language
-import domain.country.usecase.ProviderUseCase
-import domain.country.usecase.ProviderUseCase.logger
+import domain.country.usecase.ProviderCountryUseCase
+import domain.country.usecase.ProviderCountryUseCase.logger
 import io.ktor.http.*
 import io.ktor.serialization.*
 import io.ktor.server.request.*
@@ -16,7 +16,7 @@ fun Routing.countryRouting() {
 
         // Peticion GET para obtener todos los paises
         get {
-            val country = ProviderUseCase.allCountries()
+            val country = ProviderCountryUseCase.allCountries()
             call.respond(country)
         }
         // Petición GET para obtener un pais
@@ -24,7 +24,7 @@ fun Routing.countryRouting() {
             val countryPid = call.parameters["pid"]
             logger.warn("El pid tiene valor de $countryPid")
             if (countryPid != null) {
-                val country = ProviderUseCase.countryById(countryPid)
+                val country = ProviderCountryUseCase.countryById(countryPid)
                 if (country == null) {
                     call.respond(HttpStatusCode.NotFound, "País no encontrado")
                 } else {
@@ -39,13 +39,13 @@ fun Routing.countryRouting() {
                 try {
                     val lang = language.uppercase()
                     logger.warn("Lenguaje seleccionado: ${Language.valueOf(lang)}")
-                    val countries = ProviderUseCase.countryByLanguage(Language.valueOf(lang.uppercase()))
+                    val countries = ProviderCountryUseCase.countryByLanguage(Language.valueOf(lang.uppercase()))
                     call.respond(countries)
                 } catch (e: IllegalArgumentException) {
                     call.respond(HttpStatusCode.BadRequest, "Lenguaje no válido")
                 }
             } else {
-                val allCountries = ProviderUseCase.allCountries()
+                val allCountries = ProviderCountryUseCase.allCountries()
                 call.respond(allCountries)
             }
         }
@@ -54,7 +54,7 @@ fun Routing.countryRouting() {
         post {
             try {
                 val country = call.receive<Country>()
-                val newCountry = ProviderUseCase.addCountry(country)
+                val newCountry = ProviderCountryUseCase.addCountry(country)
                 if (!newCountry) {
                     call.respond(HttpStatusCode.Conflict, "El pais no ha podido insertarse, puede que ya exista")
                     return@post
@@ -73,7 +73,7 @@ fun Routing.countryRouting() {
                 val countryPid = call.parameters["pid"]
                 countryPid?.let {
                     val updatedData = call.receive<UpdateCountry>()
-                    val updatedCountry = ProviderUseCase.updateCountry(updatedData, countryPid)
+                    val updatedCountry = ProviderCountryUseCase.updateCountry(updatedData, countryPid)
                     if (!updatedCountry) {
                         call.respond(HttpStatusCode.Conflict, "El pais no puede modificarse, puede que ya exista")
                         return@patch
@@ -95,7 +95,7 @@ fun Routing.countryRouting() {
             val countryPid = call.parameters["pid"]
             logger.warn("Queremos borrar el pais con el $countryPid")
             countryPid?.let {
-                val deleted = ProviderUseCase.deleteCountry(countryPid)
+                val deleted = ProviderCountryUseCase.deleteCountry(countryPid)
                 if (!deleted) {
                     call.respond(HttpStatusCode.NotFound, "País no encontrado para borrar")
                 } else {

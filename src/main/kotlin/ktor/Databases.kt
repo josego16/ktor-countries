@@ -16,8 +16,8 @@ fun Application.configureDatabases() {
             user = username,
             password = password
         )
-        log.info("Connected to database")
+        log.info("Connected to database at $url")
     } catch (error: Exception) {
-        log.error("Failed to connect to database ${error.message}")
+        log.error("Failed to connect to database: ${error.message}")
     }
 }
