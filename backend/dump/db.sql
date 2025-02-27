@@ -1,5 +1,4 @@
 CREATE DATABASE IF NOT EXISTS dbCountries;
-
 -- Crear tabla Country
 CREATE TABLE Country
 (
@@ -14,7 +13,7 @@ CREATE TABLE Country
 );
 
 -- Crear tabla de User
-CREATE TABLE IF NOT EXISTS `User`
+CREATE TABLE User
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     dni      VARCHAR(20) UNIQUE NOT NULL,
@@ -53,7 +52,7 @@ VALUES ('FR01', 'France', 'Paris', 'French', 'Tour de France', 'Baguette, Ratato
         'https://flagcdn.com/w320/au.png');
 
 -- Insertar datos en la tabla User con datos corregidos
-INSERT INTO `User` (dni, username, password, name, phone, token)
+INSERT INTO User (dni, username, password, name, phone, token)
 VALUES ('12345678A', 'josema', 'hashed_password1', 'José Martínez', '654321789', NULL),
        ('87654321B', 'jaime', 'hashed_password2', 'Jaime López', '678912345', NULL);
 

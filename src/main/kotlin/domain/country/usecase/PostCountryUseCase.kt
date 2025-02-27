@@ -7,8 +7,11 @@ class PostCountryUseCase(val repository: CountryInterface) {
     var country: Country? = null
 
     suspend operator fun invoke(): Boolean {
-        return country?.let {
-            repository.postCountry(it) != null
-        } == true
+        return if (country == null) {
+            false
+        } else {
+            repository.postCountry(country!!)
+            true
+        }
     }
 }

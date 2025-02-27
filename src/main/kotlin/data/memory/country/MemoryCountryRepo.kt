@@ -45,7 +45,7 @@ class MemoryCountryRepo : CountryInterface {
                     name = updateCountry.name ?: currentCountry.name,
                     language = updateCountry.language ?: currentCountry.language,
                     famousEvent = updateCountry.famousEvent ?: currentCountry.famousEvent,
-                    typicalGastronomy = updateCountry.tpycalGastronomy ?: currentCountry.typicalGastronomy,
+                    typicalGastronomy = updateCountry.typicalGastronomy ?: currentCountry.typicalGastronomy,
                     flagUrl = updateCountry.flagUrl ?: currentCountry.flagUrl
                 )
                 CountriesData.listCountry[index] = updatedCountry

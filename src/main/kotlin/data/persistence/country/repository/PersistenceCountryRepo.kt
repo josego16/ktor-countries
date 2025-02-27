@@ -8,7 +8,8 @@ import domain.country.models.country.Country
 import domain.country.models.country.UpdateCountry
 import domain.country.models.enums.Language
 import domain.country.repository.CountryInterface
-import org.jetbrains.exposed.sql.deleteAll
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.update
 
 class PersistenceCountryRepo : CountryInterface {
@@ -70,20 +71,19 @@ class PersistenceCountryRepo : CountryInterface {
                     updateCountry.name?.let { stm[name] = it }
                     updateCountry.capital?.let { stm[capital] = it }
                     updateCountry.language?.let { stm[language] = it.toString() }
-                    updateCountry.famousEvent?.let { stm[famousEvent] = it.toString() }
-                    updateCountry.tpycalGastronomy?.let { stm[typicalGastronomy] = it.toString() }
+                    updateCountry.famousEvent?.let { stm[famousEvent] = it }
+                    updateCountry.typicalGastronomy?.let { stm[typicalGastronomy] = it }
                     updateCountry.flagUrl?.let { stm[flagUrl] = it }
                 }
             }
         } catch (error: Exception) {
             println("Error al actualizar un pais ${error.localizedMessage}")
-            false
         }
         return if (num == 1) countryByPid(pid) else null
     }
 
     override suspend fun deleteCountry(pid: String): Boolean = suspendedTransaction {
-        val num = CountryTable.deleteAll()
+        val num = CountryTable.deleteWhere { CountryTable.pid eq pid }
         num == 1
     }
 }

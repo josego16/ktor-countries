@@ -18,23 +18,22 @@ fun countryDaoToCountry(countryDao: CountryDao): Country {
     return coun
 }
 
-fun updateCountryToCountry(country: UpdateCountry): Country {
-    val coun = Country(
-        country.pid!!,
-        country.name!!,
-        country.capital!!,
-        country.language!!,
-        country.famousEvent!!,
-        country.tpycalGastronomy!!,
-        country.flagUrl ?: "",
+fun updateCountryToCountry(existing: Country, update: UpdateCountry): Country {
+    return Country(
+        pid = existing.pid,  // El PID nunca cambia
+        name = update.name ?: existing.name,  // Mantener valor original si es null
+        capital = update.capital ?: existing.capital,
+        language = update.language ?: existing.language,
+        famousEvent = update.famousEvent ?: existing.famousEvent,
+        typicalGastronomy = update.typicalGastronomy ?: existing.typicalGastronomy,
+        flagUrl = update.flagUrl ?: existing.flagUrl
     )
-    return coun
 }
 
 fun String.toLanguageOrDefault(): Language {
     return try {
         Language.valueOf(this)
     } catch (error: IllegalArgumentException) {
-        Language.ENGLISH
+        Language.Unknown
     }
 }

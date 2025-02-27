@@ -1,7 +1,5 @@
 package domain.country.models.country
 
-import domain.country.models.enums.Events
-import domain.country.models.enums.Gastronomy
 import domain.country.models.enums.Language
 import kotlinx.serialization.Serializable
 
@@ -11,7 +9,7 @@ data class UpdateCountry(
     val name: String? = null,
     val capital: String? = null,
     val language: Language? = null,
-    val famousEvent: Events? = null,
-    val tpycalGastronomy: Gastronomy? = null,
+    val famousEvent: String? = null,
+    val typicalGastronomy: String? = null,
     val flagUrl: String? = null
 )

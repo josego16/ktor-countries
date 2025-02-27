@@ -20,12 +20,18 @@ object ProviderCountryUseCase {
 
     suspend fun allCountries() = allCountryUseCase()
     suspend fun countryById(pid: String): Country? {
+        if (pid.isBlank()) {
+            logger.warn("Pid is null or empty")
+            return null
+        }
         countryByPidUseCase.pid = pid
         val country = countryByPidUseCase()
-        if (country == null) {
+        return if (country == null) {
             logger.warn("No se ha encontrado un país con el ID: $pid")
+            null
+        } else {
+            return country
         }
-        return country
     }
 
     suspend fun countryByLanguage(language: Language): List<Country> {
