@@ -10,6 +10,7 @@ import io.ktor.serialization.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.serialization.json.Json
 
 fun Routing.countryRouting() {
     route("/country") {
@@ -32,7 +33,8 @@ fun Routing.countryRouting() {
                 }
                 return@get
             }
-
+        }
+        get("/{language}") {
             val language = call.parameters["language"]
             logger.warn("Language tiene valor de $language")
             if (language != null) {
@@ -48,6 +50,7 @@ fun Routing.countryRouting() {
                 val allCountries = ProviderCountryUseCase.allCountries()
                 call.respond(allCountries)
             }
+            return@get
         }
 
         // Petición POST para agregar un nuevo país
@@ -70,25 +73,27 @@ fun Routing.countryRouting() {
         // Petición PATCH para editar un país
         patch("/{pid}") {
             try {
+                val requestBody = call.receiveText()
+                val updatedData = Json.decodeFromString<UpdateCountry>(requestBody)
+
                 val countryPid = call.parameters["pid"]
-                countryPid?.let {
-                    val updatedData = call.receive<UpdateCountry>()
-                    val updatedCountry = ProviderCountryUseCase.updateCountry(updatedData, countryPid)
-                    if (!updatedCountry) {
-                        call.respond(HttpStatusCode.Conflict, "El pais no puede modificarse, puede que ya exista")
-                        return@patch
-                    }
-                    call.respond(HttpStatusCode.Created, "Se ha modificado correctamente con pid = $countryPid")
-                } ?: run {
-                    call.respond(HttpStatusCode.BadRequest, "Debes identificar el pais")
+                if (countryPid == null) {
+                    call.respond(HttpStatusCode.BadRequest, "Debes identificar el país")
                     return@patch
                 }
-            } catch (error: IllegalArgumentException) {
-                call.respond(HttpStatusCode.BadRequest, error.localizedMessage)
-            } catch (error: JsonConvertException) {
-                call.respond(HttpStatusCode.BadRequest, error.localizedMessage)
+
+                val updatedCountry = ProviderCountryUseCase.updateCountry(updatedData, countryPid)
+                if (!updatedCountry) {
+                    call.respond(HttpStatusCode.Conflict, "El país no puede modificarse, puede que ya exista")
+                    return@patch
+                }
+                call.respond(HttpStatusCode.Created, "Se ha modificado correctamente con pid = $countryPid")
+            } catch (e: Exception) {
+                println("Error: ${e.message}")  // Log del error
+                call.respond(HttpStatusCode.BadRequest, "Error en la petición: ${e.message}")
             }
         }
+
 
         // Petición DELETE para eliminar un país
         delete("/{pid}") {
