@@ -4,25 +4,36 @@ import data.persistence.user.models.UserDao
 import domain.user.models.UpdateUser
 import domain.user.models.User
 
-fun userDaoToUser(userDao: UserDao): User {
-    val user = User(
-        userDao.dni,
-        userDao.username,
-        userDao.password,
-        userDao.name,
-        userDao.phone,
-        userDao.token ?: "null",
+fun User.toUpdateUser(): UpdateUser {
+    return UpdateUser(
+        dni = dni,
+        name = name,
+        phone = phone,
+        username = username,
+        password = password,
+        token = token
     )
-    return user
 }
 
-fun updateUserToUser(user: UpdateUser): User {
+fun UpdateUser.toUser(): User {
     return User(
-        user.dni!!,
-        user.username!!,
-        user.password!!,
-        user.name!!,
-        user.phone!!,
-        user.token ?: ""
+        dni = dni!!,
+        name = name!!,
+        phone = phone!!,
+        username = username!!,
+        password = password!!,
+        token = token!!
     )
+}
+
+fun UserDao.toUser(): User {
+    val us = User(
+        this.dni,
+        this.name,
+        this.phone,
+        this.username,
+        this.password,
+        this.token ?: "null"
+    )
+    return us
 }

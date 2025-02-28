@@ -12,9 +12,6 @@ object ProviderUserUseCase {
 
     private val allUsersUseCase = AllUsersUseCase(repository)
     private val userByDniUseCase = UserByDniUseCase(repository)
-    private val userByUsernameUseCase = UserByUsernameUseCase(repository)
-    private val updateUserUseCase = UpdateUserUseCase(repository)
-    private val deleteUserUseCase = DeleteUserUseCase(repository)
     private val loginUserUseCase = LoginUserUseCase(repository)
     private val registerUserUseCase = RegisterUserUseCase(repository)
 
@@ -36,22 +33,7 @@ object ProviderUserUseCase {
         }
     }
 
-    suspend fun updateUser(updateUser: UpdateUser?, dni: String): Boolean {
-        if (updateUser == null) {
-            logger.warn("El usuario o no existe")
-            return false
-        }
-        updateUserUseCase.updateUser = updateUser
-        updateUserUseCase.dni = dni
-        return updateUserUseCase()
-    }
-
-    suspend fun deleteUser(dni: String): Boolean {
-        deleteUserUseCase.dni = dni
-        return deleteUserUseCase()
-    }
-
-    suspend fun login(dni: String?, passwd: String?): Boolean {
+    suspend fun login(dni: String?, passwd: String?): User? {
         return loginUserUseCase(dni, passwd)
     }
 

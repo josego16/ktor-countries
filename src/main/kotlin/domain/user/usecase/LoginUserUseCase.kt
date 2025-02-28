@@ -1,18 +1,17 @@
 package domain.user.usecase
 
+import domain.user.models.User
 import domain.user.repository.UserInterface
 
 class LoginUserUseCase(val repository: UserInterface) {
-    suspend operator fun invoke(dni: String?, passwd: String?): Boolean {
-        if (dni.isNullOrBlank() || passwd.isNullOrBlank()) {
-            return false
-        }
+    suspend operator fun invoke(dni: String?, pass: String?): User? {
+        if (dni.isNullOrBlank() || pass.isNullOrBlank()) return null
+
         return try {
-            val us = repository.login(dni, passwd)
-            us
+            repository.login(dni, pass)
         } catch (error: Exception) {
-            println("Error en el login: ${error.localizedMessage}")
-            false
+            println("Error en login: ${error.localizedMessage}")
+            null
         }
     }
 }

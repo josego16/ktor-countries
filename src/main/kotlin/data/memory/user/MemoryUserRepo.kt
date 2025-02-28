@@ -9,23 +9,11 @@ class MemoryUserRepo : UserInterface {
         TODO("Not yet implemented")
     }
 
-    override suspend fun userbyUsername(username: String): List<User> {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun userByDni(dni: String): User? {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateUser(updateUser: UpdateUser, dni: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun deleteUser(dni: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun login(dni: String, passwd: String): Boolean {
+    override suspend fun login(dni: String, pass: String): User? {
         TODO("Not yet implemented")
     }
 
