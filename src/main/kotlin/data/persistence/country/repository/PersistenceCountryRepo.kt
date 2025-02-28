@@ -52,12 +52,12 @@ class PersistenceCountryRepo : CountryInterface {
                     this.name = country.name
                     this.capital = country.capital
                     this.language = country.language.toString()
-                    this.famousEvent = country.famousEvent.toString()
-                    this.typicalGastronomy = country.typicalGastronomy.toString()
+                    this.famousEvent = country.famousEvent
+                    this.typicalGastronomy = country.typicalGastronomy
                     this.flagUrl = country.flagUrl
                 }
             }
-            coun
+            country
         } else {
             null
         }

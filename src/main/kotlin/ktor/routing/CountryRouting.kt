@@ -20,6 +20,7 @@ fun Routing.countryRouting() {
             val country = ProviderCountryUseCase.allCountries()
             call.respond(country)
         }
+
         // Petición GET para obtener un pais
         get("/{pid}") {
             val countryPid = call.parameters["pid"]
@@ -34,23 +35,28 @@ fun Routing.countryRouting() {
                 return@get
             }
         }
-        get("/{language}") {
+
+        // Petición GET para obtener los paises con un lenguaje específico
+        get("/language/{language}") {
             val language = call.parameters["language"]
             logger.warn("Language tiene valor de $language")
+
             if (language != null) {
-                try {
-                    val lang = language.uppercase()
-                    logger.warn("Lenguaje seleccionado: ${Language.valueOf(lang)}")
-                    val countries = ProviderCountryUseCase.countryByLanguage(Language.valueOf(lang.uppercase()))
+                val lang = language.trim()
+                val validLanguage = Language.entries.find { it.name.equals(lang, ignoreCase = true) }
+
+                if (validLanguage != null) {
+                    logger.warn("Lenguaje seleccionado: $validLanguage")
+                    val countries = ProviderCountryUseCase.countryByLanguage(validLanguage)
                     call.respond(countries)
-                } catch (e: IllegalArgumentException) {
+                } else {
+                    logger.warn("Error: Lenguaje no válido")
                     call.respond(HttpStatusCode.BadRequest, "Lenguaje no válido")
                 }
             } else {
                 val allCountries = ProviderCountryUseCase.allCountries()
                 call.respond(allCountries)
             }
-            return@get
         }
 
         // Petición POST para agregar un nuevo país
