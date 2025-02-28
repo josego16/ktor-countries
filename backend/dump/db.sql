@@ -17,10 +17,10 @@ CREATE TABLE User
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
     dni      VARCHAR(20) UNIQUE NOT NULL,
-    username VARCHAR(100)       NOT NULL,
-    password VARCHAR(255)       NOT NULL,
     name     VARCHAR(100)       NOT NULL,
     phone    VARCHAR(15)        NOT NULL,
+    username VARCHAR(100)       NOT NULL,
+    password VARCHAR(255)       NOT NULL,
     token    VARCHAR(255)
 );
 
@@ -50,13 +50,3 @@ VALUES ('FR01', 'France', 'Paris', 'French', 'Tour de France', 'Baguette, Ratato
         'https://flagcdn.com/w320/gb.png'),
        ('AU12', 'Australia', 'Canberra', 'English', 'Melbourne Cup', 'Vegemite, Meat Pie, Pavlova',
         'https://flagcdn.com/w320/au.png');
-
--- Insertar datos en la tabla User con datos corregidos
-INSERT INTO User (dni, username, password, name, phone, token)
-VALUES ('12345678A', 'josema', 'hashed_password1', 'José Martínez', '654321789', NULL),
-       ('87654321B', 'jaime', 'hashed_password2', 'Jaime López', '678912345', NULL);
-
--- Agregar clave foránea a la tabla User, si es necesario
--- Si deseas relacionar la tabla User con Country por ejemplo a través de un campo country_id:
--- ALTER TABLE "User" ADD COLUMN country_id INT;
--- ALTER TABLE "User" ADD CONSTRAINT fk_country FOREIGN KEY (country_id) REFERENCES Country(id);
