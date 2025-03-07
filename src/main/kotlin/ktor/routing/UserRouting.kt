@@ -20,7 +20,7 @@ fun Routing.userRouting() {
             call.respond(user)
         }
 
-        // Petición GET para obtener un pais
+        // Petición GET para obtener un usuario
         get("/{dni}") {
             val userId = call.parameters["dni"]
             logger.warn("El pid tiene valor de $userId")

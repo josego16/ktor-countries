@@ -20,8 +20,8 @@ fun countryDaoToCountry(countryDao: CountryDao): Country {
 
 fun updateCountryToCountry(existing: Country, update: UpdateCountry): Country {
     return Country(
-        pid = existing.pid,  // El PID nunca cambia
-        name = update.name ?: existing.name,  // Mantener valor original si es null
+        pid = existing.pid,
+        name = update.name ?: existing.name,
         capital = update.capital ?: existing.capital,
         language = update.language ?: existing.language,
         famousEvent = update.famousEvent ?: existing.famousEvent,
