@@ -8,7 +8,7 @@ class RegisterUserUseCase(val repository: UserInterface) {
     suspend operator fun invoke(updateUser: UpdateUser): User? {
         updateUser.dni = updateUser.dni!!
         updateUser.name = updateUser.name!!
-        updateUser.phone = updateUser.phone!!
+        updateUser.phone = updateUser.phone?:"000000000"
         updateUser.username = updateUser.username!!
         updateUser.password = updateUser.password!!
         updateUser.token = updateUser.token ?: ""

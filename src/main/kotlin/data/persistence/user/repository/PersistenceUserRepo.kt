@@ -56,4 +56,15 @@ class PersistenceUserRepo : UserInterface {
             null
         }
     }
+
+    override suspend fun updateToken(dni: String, token: String) {
+        suspendedTransaction {
+            val user = UserDao.find {
+                UserTable.dni eq dni
+            }.firstOrNull()
+            user?.let {
+                it.token = token
+            }
+        }
+    }
 }

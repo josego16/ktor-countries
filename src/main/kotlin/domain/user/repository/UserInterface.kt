@@ -8,4 +8,5 @@ interface UserInterface {
     suspend fun userByDni(dni: String): User?
     suspend fun login(dni: String, pass: String): User?
     suspend fun register(updateUser: UpdateUser): User?
+    suspend fun updateToken(dni: String, token: String)
 }

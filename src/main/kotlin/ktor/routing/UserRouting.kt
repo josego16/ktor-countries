@@ -62,9 +62,9 @@ fun Routing.userRouting() {
                 val register = ProviderUserUseCase.register(user)
 
                 if (register != null) {
-                    val upEmp = register.toUpdateUser()
-                    upEmp.msg = "Usuario con dni =  ${upEmp.dni}, registrado correctamente. Vuelva a loguearse"
-                    call.respond(HttpStatusCode.Created, upEmp)
+                    val upUsr = register.toUpdateUser()
+                    upUsr.msg = "Usuario con dni = ${upUsr.dni}, registrado correctamente"
+                    call.respond(HttpStatusCode.Created, upUsr)
                 } else {
                     call.respond(HttpStatusCode.Conflict, "No se ha podido realizar el registro")
                 }

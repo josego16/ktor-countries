@@ -20,4 +20,8 @@ class MemoryUserRepo : UserInterface {
     override suspend fun register(updateUser: UpdateUser): User? {
         TODO("Not yet implemented")
     }
+
+    override suspend fun updateToken(dni: String, token: String) {
+        TODO("Not yet implemented")
+    }
 }

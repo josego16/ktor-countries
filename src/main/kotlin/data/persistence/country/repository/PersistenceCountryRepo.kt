@@ -3,7 +3,7 @@ package data.persistence.country.repository
 import data.persistence.country.models.CountryDao
 import data.persistence.country.models.CountryTable
 import data.persistence.suspendedTransaction
-import domain.country.mapping.countryDaoToCountry
+import domain.country.mapping.toCountry
 import domain.country.models.country.Country
 import domain.country.models.country.UpdateCountry
 import domain.country.models.enums.Language
@@ -15,7 +15,7 @@ import org.jetbrains.exposed.sql.update
 class PersistenceCountryRepo : CountryInterface {
     override suspend fun allCountries(): List<Country> {
         return suspendedTransaction {
-            CountryDao.all().map(::countryDaoToCountry)
+            CountryDao.all().map { it.toCountry() }
         }
     }
 
@@ -23,7 +23,7 @@ class PersistenceCountryRepo : CountryInterface {
         return suspendedTransaction {
             CountryDao.find {
                 CountryTable.pid eq pid
-            }.limit(1).map(::countryDaoToCountry).firstOrNull()
+            }.limit(1).map { it.toCountry() }.firstOrNull()
         }
     }
 
@@ -31,7 +31,7 @@ class PersistenceCountryRepo : CountryInterface {
         return suspendedTransaction {
             CountryDao.find {
                 CountryTable.name eq name
-            }.map(::countryDaoToCountry).firstOrNull()
+            }.map { it.toCountry() }.firstOrNull()
         }
     }
 
@@ -39,7 +39,7 @@ class PersistenceCountryRepo : CountryInterface {
         return suspendedTransaction {
             CountryDao.find {
                 CountryTable.language eq language.toString()
-            }.map(::countryDaoToCountry)
+            }.map { it.toCountry() }
         }
     }
 

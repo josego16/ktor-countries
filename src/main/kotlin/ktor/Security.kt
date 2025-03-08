@@ -1,5 +1,8 @@
 package ktor
 
+import domain.user.security.JwtConfig
+import domain.user.usecase.ProviderUserUseCase
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
@@ -9,6 +12,7 @@ import io.ktor.server.routing.*
 fun Application.configureSecurity() {
     install(Authentication) {
         jwt("jwt-auth") {
+            JwtConfig.configureAuthentication(this)
         }
     }
     routing {
@@ -23,5 +27,14 @@ fun Application.configureSecurity() {
 }
 
 suspend fun ApplicationCall.validateToken(token: String): Boolean {
-    TODO()
+    val dataUser = this.principal<JWTPrincipal>()
+    val dni = dataUser?.payload?.getClaim("dni")?.asString()
+
+    val user = ProviderUserUseCase.userByDni(dni!!)
+    if (user == null || token != user.token) {
+        this.respond(HttpStatusCode.Unauthorized, "Token invalid.")
+        return false
+    } else {
+        return true
+    }
 }

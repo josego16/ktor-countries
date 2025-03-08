@@ -16,8 +16,8 @@ fun Application.configureRouting() {
         }
     }
     routing {
-        countryRouting()
         userRouting()
+        countryRouting()
 
         // Static plugin. Try to access `/static/index.html`
         staticResources("/static", "static")

@@ -1,6 +1,5 @@
 package data.persistence.country.models
 
-import data.persistence.country.models.CountryTable
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
