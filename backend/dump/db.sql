@@ -28,21 +28,20 @@ CREATE TABLE Country
 );
 
 -- Agregar la columna owner_id permitiendo valores NULL temporalmente
-ALTER TABLE Country ADD COLUMN owner_id INT NULL;
-
--- Insertar un usuario de prueba (si aún no hay usuarios)
-INSERT INTO User (dni, name, phone, username, password, token)
-VALUES ('12345678X', 'Admin User', '123456789', 'admin', 'password123', NULL)
-ON DUPLICATE KEY UPDATE id=id;
+ALTER TABLE Country
+    ADD COLUMN owner_id INT NULL;
 
 -- Asignar un owner_id a los países existentes (se asigna al primer usuario disponible)
-UPDATE Country SET owner_id = (SELECT id FROM User ORDER BY id LIMIT 1);
+UPDATE Country
+SET owner_id = (SELECT id FROM User ORDER BY id LIMIT 1);
 
 -- Modificar la columna owner_id para que sea NOT NULL
-ALTER TABLE Country MODIFY COLUMN owner_id INT NOT NULL;
+ALTER TABLE Country
+    MODIFY COLUMN owner_id INT NOT NULL;
 
 -- Agregar la clave foránea con restricción ON DELETE CASCADE
-ALTER TABLE Country ADD CONSTRAINT fk_country_user FOREIGN KEY (owner_id) REFERENCES User(id) ON DELETE CASCADE;
+ALTER TABLE Country
+    ADD CONSTRAINT fk_country_user FOREIGN KEY (owner_id) REFERENCES User (id) ON DELETE CASCADE;
 
 -- Insertar datos en la tabla Country con la nueva estructura
 INSERT INTO Country (pid, name, capital, language, famousEvent, typicalGastronomy, flag_url, owner_id)
