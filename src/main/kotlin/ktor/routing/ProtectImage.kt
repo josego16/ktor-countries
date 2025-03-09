@@ -13,21 +13,22 @@ fun Route.imgRouting() {
         authenticate("jwt-auth") {
             get {
                 val token = call.request.headers["Authorization"]?.removePrefix("Bearer ")
-                val validate = call.validateToken(token!!)
+                val validate = call.validateToken(token ?: "")
 
                 if (!validate) {
-                    return@get
+                    return@get call.respond(HttpStatusCode.Unauthorized, "Token inválido")
                 }
-                val pid = call.parameters["pid"] ?: return@get call.respond(HttpStatusCode.BadRequest, "Necesitamos el pid")
-                val nameImage = call.parameters["image"] ?: return@get call.respond(HttpStatusCode.BadRequest, "Necesitamos la imagen")
 
-                val path =
-                    ApplicationContext.context.environment.config.property("ktor.path.images").getString() + "/$pid"
+                val pid = call.parameters["pid"] ?: return@get call.respond(HttpStatusCode.BadRequest, "Necesitamos el pid")
+                val nameImage = call.parameters["image"] ?: return@get call.respond(HttpStatusCode.BadRequest, "Necesitamos el nombre de la imagen")
+
+                val path = ApplicationContext.context.environment.config.property("ktor.path.images").getString() + "/$pid"
                 val img = File(path, nameImage)
 
                 if (!img.exists()) {
-                    return@get call.respond(HttpStatusCode.BadRequest, "Imagen no encontrada")
+                    return@get call.respond(HttpStatusCode.NotFound, "Imagen no encontrada")
                 }
+
                 call.respondFile(img)
             }
         }

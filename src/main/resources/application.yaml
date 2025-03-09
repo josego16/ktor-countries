@@ -3,7 +3,7 @@ ktor:
     modules:
       - ktor.ApplicationKt.module
   deployment:
-    port: 8081
+    port: 8082
     host: "localhost"
   urlPath:
     baseUrl: "http://localhost:8081"

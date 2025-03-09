@@ -90,7 +90,7 @@ fun Routing.countryRouting() {
                 try {
                     val country = call.receive<Country>()
                     val newCountry = ProviderCountryUseCase.addCountry(country)
-                    if (!newCountry) {
+                    if (newCountry == null) {
                         call.respond(HttpStatusCode.Conflict, "El pais no ha podido insertarse, puede que ya exista")
                         return@post
                     }
@@ -120,7 +120,7 @@ fun Routing.countryRouting() {
                     }
 
                     val updatedCountry = ProviderCountryUseCase.updateCountry(updatedData, countryPid)
-                    if (!updatedCountry) {
+                    if (updatedCountry == null) {
                         call.respond(HttpStatusCode.Conflict, "El país no puede modificarse, puede que ya exista")
                         return@patch
                     }
