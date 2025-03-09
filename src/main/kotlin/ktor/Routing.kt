@@ -7,7 +7,9 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import ktor.routing.countryRouting
+import ktor.routing.imgRouting
 import ktor.routing.userRouting
+import java.io.File
 
 fun Application.configureRouting() {
     install(StatusPages) {
@@ -18,8 +20,12 @@ fun Application.configureRouting() {
     routing {
         userRouting()
         countryRouting()
+        imgRouting()
 
         // Static plugin. Try to access `/static/index.html`
         staticResources("/static", "static")
+
+        staticFiles("/images", File("upload/images"))
+        staticFiles("/files", File("upload/files"))
     }
 }

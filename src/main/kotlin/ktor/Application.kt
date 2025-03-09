@@ -8,8 +8,9 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    configureContext(this)
     configureSerialization()
-    configureDatabases()
     configureSecurity()
+    configureDatabases()
     configureRouting()
 }

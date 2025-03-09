@@ -11,5 +11,5 @@ data class Country(
     val language: Language,
     val famousEvent: String,
     val typicalGastronomy: String,
-    val flagUrl: String? = null
+    var flagUrl: String? = null
 )

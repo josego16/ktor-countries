@@ -11,6 +11,6 @@ data class UpdateCountry(
     val language: Language? = null,
     val famousEvent: String? = null,
     val typicalGastronomy: String? = null,
-    val flagUrl: String? = null,
+    var flagUrl: String? = null,
     var msg: String? = null,
 )

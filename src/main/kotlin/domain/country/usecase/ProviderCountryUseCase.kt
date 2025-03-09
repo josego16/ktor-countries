@@ -39,25 +39,23 @@ object ProviderCountryUseCase {
         return countryByLanguageUseCase()
     }
 
-    suspend fun addCountry(country: Country?): Boolean {
+    suspend fun addCountry(country: Country?): Country? {
         if (country == null) {
             logger.warn("No existen datos del pais a insertar")
-            return false
+            return null
         }
         postCountryUseCase.country = country
         val res = postCountryUseCase()
-        return if (!res) {
-            logger.warn("No se ha insertado el empleado. Posiblemente ya exista")
-            false
-        } else {
-            true
+        if (res == null) {
+            logger.warn("No se ha insertado el pais. Posiblemente ya exista")
         }
+        return res
     }
 
-    suspend fun updateCountry(updateCountry: UpdateCountry?, pid: String): Boolean {
+    suspend fun updateCountry(updateCountry: UpdateCountry?, pid: String): Country? {
         if (updateCountry == null) {
             logger.warn("No existen datos del pais para actualizar")
-            return false
+            return null
         }
         updateCountryUseCase.updateCountry = updateCountry
         updateCountryUseCase.pid = pid

@@ -38,7 +38,11 @@ object ProviderUserUseCase {
     }
 
     suspend fun register(updateUser: UpdateUser): User? {
-        return if (updateUser.dni.isNullOrBlank() || updateUser.username.isNullOrBlank() || updateUser.password.isNullOrBlank()) {
+        return if (
+            updateUser.dni.isNullOrBlank() ||
+            updateUser.username.isNullOrBlank() ||
+            updateUser.password.isNullOrBlank()
+        ) {
             null
         } else {
             registerUserUseCase(updateUser)

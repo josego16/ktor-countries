@@ -5,8 +5,15 @@ ktor:
   deployment:
     port: 8081
     host: "localhost"
+  urlPath:
+    baseUrl: "http://localhost:8081"
+    images: "images"
+    files: "files"
   database:
     url: "jdbc:mariadb://localhost:3306/dbCountries"
     driver: "org.mariadb.jdbc.Driver"
     username: "josema"
     password: "josema"
+  path:
+    file: "upload/files"
+    images: "upload/images"
