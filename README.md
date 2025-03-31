@@ -1,68 +1,68 @@
-# Ktor Countries Project
+# Proyecto Ktor Countries
 
-## Project Overview
+## Descripción del Proyecto
 
-This project is a Ktor-based application that provides an API for managing countries and users. It includes features for adding, updating, deleting, and retrieving countries and users. The project uses a MariaDB database for persistence and JWT for authentication.
+Este proyecto es una aplicación basada en Ktor que proporciona una API para gestionar países y usuarios. Incluye características para agregar, actualizar, eliminar y recuperar países y usuarios. El proyecto utiliza una base de datos MariaDB para la persistencia y JWT para la autenticación.
 
-## Features
+## Características
 
-- Add, update, delete, and retrieve countries
-- Add, update, delete, and retrieve users
-- JWT-based authentication
-- Database integration with MariaDB
-- Static file serving
+- Agregar, actualizar, eliminar y recuperar países
+- Agregar, actualizar, eliminar y recuperar usuarios
+- Autenticación basada en JWT
+- Integración con base de datos MariaDB
+- Servir archivos estáticos
 
-## Technologies Used
+## Tecnologías Utilizadas
 
 - Kotlin
 - Ktor
 - MariaDB
 - JWT
-- Exposed (SQL library)
-- Bcrypt (for password hashing)
-- Logback (for logging)
+- Exposed (biblioteca SQL)
+- Bcrypt (para el hash de contraseñas)
+- Logback (para el registro de logs)
 
-## API Routes
+## Rutas de la API
 
-### Country Routes
+### Rutas de País
 
-- `GET /country`: Retrieve all countries
-- `GET /country/{pid}`: Retrieve a country by its PID
-- `GET /country/language/{language}`: Retrieve countries by language
-- `POST /country`: Add a new country
-- `PATCH /country/{pid}`: Update a country by its PID
-- `DELETE /country/{pid}`: Delete a country by its PID
+- `GET /country`: Recuperar todos los países
+- `GET /country/{pid}`: Recuperar un país por su PID
+- `GET /country/language/{language}`: Recuperar países por idioma
+- `POST /country`: Agregar un nuevo país
+- `PATCH /country/{pid}`: Actualizar un país por su PID
+- `DELETE /country/{pid}`: Eliminar un país por su PID
 
-### User Routes
+### Rutas de Usuario
 
-- `GET /user`: Retrieve all users
-- `GET /user/{dni}`: Retrieve a user by their DNI
-- `POST /user/login`: Login a user
-- `POST /user/register`: Register a new user
+- `GET /user`: Recuperar todos los usuarios
+- `GET /user/{dni}`: Recuperar un usuario por su DNI
+- `POST /user/login`: Iniciar sesión de un usuario
+- `POST /user/register`: Registrar un nuevo usuario
 
-### Example Requests for Postman
+### Ejemplos de Solicitudes para Postman
 
-#### Country Routes
+#### Rutas de País
 
-- Retrieve all countries:
+- Recuperar todos los países:
   ```
   GET /country
   Authorization: Bearer <JWT_TOKEN>
   ```
 
-- Retrieve a country by its PID:
+- Recuperar un país por su PID:
   ```
   GET /country/{pid}
   Authorization: Bearer <JWT_TOKEN>
   ```
 
-- Retrieve countries by language:
+- Recuperar países por idioma:
   ```
   GET /country/language/{language}
   Authorization: Bearer <JWT_TOKEN>
   ```
 
-- Add a new country:
+- Agregar un nuevo país:
   ```
   POST /country
   Authorization: Bearer <JWT_TOKEN>
@@ -74,7 +74,7 @@ This project is a Ktor-based application that provides an API for managing count
   }
   ```
 
-- Update a country by its PID:
+- Actualizar un país por su PID:
   ```
   PATCH /country/{pid}
   Authorization: Bearer <JWT_TOKEN>
@@ -85,25 +85,25 @@ This project is a Ktor-based application that provides an API for managing count
   }
   ```
 
-- Delete a country by its PID:
+- Eliminar un país por su PID:
   ```
   DELETE /country/{pid}
   Authorization: Bearer <JWT_TOKEN>
   ```
 
-#### User Routes
+#### Rutas de Usuario
 
-- Retrieve all users:
+- Recuperar todos los usuarios:
   ```
   GET /user
   ```
 
-- Retrieve a user by their DNI:
+- Recuperar un usuario por su DNI:
   ```
   GET /user/{dni}
   ```
 
-- Login a user:
+- Iniciar sesión de un usuario:
   ```
   POST /user/login
   Content-Type: application/json
@@ -113,7 +113,7 @@ This project is a Ktor-based application that provides an API for managing count
   }
   ```
 
-- Register a new user:
+- Registrar un nuevo usuario:
   ```
   POST /user/register
   Content-Type: application/json
