@@ -1,13 +1,16 @@
+package ktor
+
 import io.ktor.server.application.*
-import io.ktor.server.netty.EngineMain
+import io.ktor.server.netty.*
 
 fun main(args: Array<String>) {
     EngineMain.main(args)
 }
 
 fun Application.module() {
+    configureContext(this)
     configureSerialization()
+    configureSecurity()
     configureDatabases()
-    configureHTTP()
     configureRouting()
 }
